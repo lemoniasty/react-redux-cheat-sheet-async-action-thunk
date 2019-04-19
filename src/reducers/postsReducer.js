@@ -5,7 +5,7 @@
 //  * Must not return reach 'out of itself' to decide what value to return
 //  * Must not mutate its input 'state' argument
 
-export default () => {
+export default (state = [], action) => {
     // Mutating states in reducers for objects and arrays
     // Arrays
     //              TYPE                           BAD                               GOOD
@@ -18,4 +18,12 @@ export default () => {
     //  Updating a property in an object       state.name = 'Sam'           {...state, name: 'Sam'}
     //  Adding a property to an object         state.age = 30               {...state, age: 30}
     //  Removing a property from an array      delete state.name  {...state, age: undefined} or _.omit(state, 'age')
+
+    // Return payload.
+    if (action.type === 'FETCH_POSTS') {
+        return action.payload;
+    }
+
+    // Return default state.
+    return state;
 };
